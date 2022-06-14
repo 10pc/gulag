@@ -494,30 +494,7 @@ async def login(
         revision=int(match["revision"]) if match["revision"] else None,
         stream=match["stream"] or "stable",
     )
-
-    # disallow login for clients older than 90 days
-    if osu_version.date < (date.today() - DELTA_90_DAYS):
-        return {
-            "osu_token": "client-too-old",
-            "response_body": (
-                app.packets.version_update_forced() + app.packets.user_id(-2)
-            ),
-        }
-
-    running_under_wine = login_data["adapters_str"] == "runningunderwine"
-    adapters = [a for a in login_data["adapters_str"][:-1].split(".")]
-
-    if not (running_under_wine or any(adapters)):
-        return {
-            "osu_token": "empty-adapters",
-            "response_body": (
-                app.packets.user_id(-1)
-                + app.packets.notification("Please restart your osu! and try again.")
-            ),
-        }
-
-    ## parsing successful
-
+    
     login_time = time.time()
 
     # TODO: improve tournament client support
