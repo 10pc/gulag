@@ -399,7 +399,6 @@ async def api_get_player_scores(
         mods = Mods(row["mods"])
         bmap = await Beatmap.from_md5(row.pop("map_md5"))
         row["beatmap"] = bmap.as_dict if bmap else None
-        row["beatmap"]["diff_mods"] = bmap.calc_star_rating(mods)
         row["mods_readable"] = mods.__repr__()
 
     player_info = {
