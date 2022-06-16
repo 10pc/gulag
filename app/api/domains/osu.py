@@ -616,7 +616,11 @@ async def osuSubmitModularSelector(
     unique_ids: str = Form(..., alias="c1"),  # TODO: more validaton
     score_time: int = Form(..., alias="st"),  # TODO: is this real name?
     pw_md5: str = Form(..., alias="pass"),
+    osu_version: str = Form(..., alias="osuver"),  # TODO: regex
     client_hash_b64: bytes = Form(..., alias="s"),
+    # TODO: do these need to be Optional?
+    # TODO: validate this is actually what it is
+    fl_cheat_screenshot: Optional[bytes] = File(None, alias="i"),
     db_conn: databases.core.Connection = Depends(acquire_db_conn),
 ):
     """Handle a score submission from an osu! client with an active session."""
