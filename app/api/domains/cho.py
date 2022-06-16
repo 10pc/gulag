@@ -621,6 +621,9 @@ async def login(
 
     # TODO: store adapters individually
 
+    # old client connection issue fixed
+    # TODO: leaderboard and score submission
+    
     if running_under_wine:
         hw_checks = "h.uninstall_id = :uninstall"
         hw_args = {"uninstall": login_data["uninstall_md5"]}
