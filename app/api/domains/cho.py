@@ -494,15 +494,7 @@ async def login(
         revision=int(match["revision"]) if match["revision"] else None,
         stream=match["stream"] or "stable",
     )
-<<<<<<< HEAD
-
     
-
-    ## parsing successful
-
-=======
-    
->>>>>>> e43b6471e98acfbf87b68df6297bbdd2c24a11f6
     login_time = time.time()
 
     # TODO: improve tournament client support
