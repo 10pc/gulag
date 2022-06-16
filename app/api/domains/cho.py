@@ -612,7 +612,6 @@ async def login(
         "FROM client_hashes h "
         "INNER JOIN users u ON h.userid = u.id "
         "WHERE h.userid != :user_id AND "
-        f"({hw_checks})",
         {"user_id": user_info["id"], **hw_args},
     )
 
