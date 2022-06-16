@@ -494,7 +494,7 @@ async def login(
         revision=int(match["revision"]) if match["revision"] else None,
         stream=match["stream"] or "stable",
     )
-    
+
     login_time = time.time()
 
     # TODO: improve tournament client support
@@ -606,17 +606,6 @@ async def login(
     )
 
     # TODO: store adapters individually
-
-    if running_under_wine:
-        hw_checks = "h.uninstall_id = :uninstall"
-        hw_args = {"uninstall": login_data["uninstall_md5"]}
-    else:
-        hw_checks = "h.adapters = :adapters OR h.uninstall_id = :uninstall OR h.disk_serial = :disk_serial"
-        hw_args = {
-            "adapters": login_data["adapters_md5"],
-            "uninstall": login_data["uninstall_md5"],
-            "disk_serial": login_data["disk_signature_md5"],
-        }
 
     hw_matches = await db_conn.fetch_all(
         "SELECT u.name, u.priv, h.occurrences "
