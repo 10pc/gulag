@@ -873,7 +873,7 @@ async def unsilence(ctx: Context) -> Optional[str]:
 @command(Privileges.ADMINISTRATOR, aliases=["nuke","w"], hidden=True)
 async def wipe(ctx: Context) -> Optional[str]:
     """Wipe a player."""
-    target = await app.state.sessions.players.from_cache_or_sql(id=" ".join(ctx.args))
+    await app.state.sessions.players.from_cache_or_sql(target=ctx.args[0])):
     if not target:
         return "User not Found."
     if target is not int:
@@ -889,6 +889,7 @@ async def wipe(ctx: Context) -> Optional[str]:
     "DELETE from scores where id= :user_id",
     {"user_id": target}
 )
+return "user Wiped."
 @command(Privileges.ADMINISTRATOR, aliases=["u"], hidden=True)
 async def user(ctx: Context) -> Optional[str]:
     """Return general information about a given user."""
