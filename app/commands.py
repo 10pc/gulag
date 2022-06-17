@@ -870,8 +870,25 @@ async def unsilence(ctx: Context) -> Optional[str]:
 # The commands below are relatively dangerous,
 # and are generally for managing players.
 """
-
-
+@command(Privileges.ADMINISTRATOR, aliases=["nuke","w"], hidden=True)
+async def wipe(ctx: Context) -> Optional[str]:
+    """Wipe a player."""
+    target = await app.state.sessions.players.from_cache_or_sql(id=" ".join(ctx.args))
+    if not target:
+        return "User not Found."
+    if target is not int
+        return "Invalid Formatting. !wipe <userid>"
+    if target is app.state.sessions.bot or target is ctx.player:
+        return "Are you fucking stupid?"
+# Checks passed
+    await db_conn.execute(
+    "UPDATE stats SET pp = 0, tscore = 0, rscore = 0, acc = 0.000, xh_count = 0, x_count = 0, sh_count = 0, s_count = 0, a_count = 0 WHERE id = :user_id",
+    {"user_id": target}
+)
+    await db_conn.execute(
+    "DELETE from scores where id= :user_id",
+    {"user_id": target}
+)
 @command(Privileges.ADMINISTRATOR, aliases=["u"], hidden=True)
 async def user(ctx: Context) -> Optional[str]:
     """Return general information about a given user."""
