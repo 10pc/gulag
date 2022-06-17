@@ -888,7 +888,6 @@ async def wipe(ctx: Context) -> Optional[str]:
     await db_conn.execute(
     "DELETE from scores where id= :user_id",
     {"user_id": target}
-        return "user Wiped."
 )
 
 @command(Privileges.ADMINISTRATOR, aliases=["u"], hidden=True)
