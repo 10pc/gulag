@@ -876,7 +876,7 @@ async def wipe(ctx: Context) -> Optional[str]:
     target = await app.state.sessions.players.from_cache_or_sql(id=" ".join(ctx.args))
     if not target:
         return "User not Found."
-    if target is not int
+    if target is not int:
         return "Invalid Formatting. !wipe <userid>"
     if target is app.state.sessions.bot or target is ctx.player:
         return "Are you fucking stupid?"
