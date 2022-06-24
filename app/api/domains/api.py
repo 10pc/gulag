@@ -120,13 +120,12 @@ async def api_get_player_count():
     )
 
     return ORJSONResponse(
-        {
-            "status": "success",
-            "counts": {
+        [
+            {
                 "online": len(app.state.sessions.players.unrestricted) - 1,
-                "total": total_users,
-            },
-        },
+                "total": total_users
+            }
+        ]
     )
 
 
