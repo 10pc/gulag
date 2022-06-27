@@ -507,11 +507,10 @@ async def api_get_map_info(
         )
 
     return ORJSONResponse(
-        [
-            {
-                bmap.as_dict
-            }
-        ]
+        {
+            "status": "success",
+            "map": bmap.as_dict,
+        },
     )
 
 
