@@ -509,26 +509,26 @@ async def api_get_map_info(
     return ORJSONResponse(
         [
             {
-                "id": m.id,
-                "md5": m.md5,
-                "set_id": m.set_id,
-                "artist": m.artist,
-                "title": m.title,
-                "version": m.version,
-                "creator": m.creator,
-                "last_update": m.last_update,
-                "total_length": m.total_length,
-                "max_combo": m.max_combo,
-                "status": m.status,
-                "plays": m.plays,
-                "passes": m.passes,
-                "mode": m.mode,
-                "bpm": m.bpm,
-                "cs": m.cs,
-                "od": m.od,
-                "ar": m.ar,
-                "hp": m.hp,
-                "diff": m.diff
+                "id": Beatmap.id,
+                "md5": Beatmap.md5,
+                "set_id": Beatmap.set_id,
+                "artist": Beatmap.artist,
+                "title": Beatmap.title,
+                "version": Beatmap.version,
+                "creator": Beatmap.creator,
+                "last_update": Beatmap.last_update,
+                "total_length": Beatmap.total_length,
+                "max_combo": Beatmap.max_combo,
+                "status": Beatmap.status,
+                "plays": Beatmap.plays,
+                "passes": Beatmap.passes,
+                "mode": Beatmap.mode,
+                "bpm": Beatmap.bpm,
+                "cs": Beatmap.cs,
+                "od": Beatmap.od,
+                "ar": Beatmap.ar,
+                "hp": Beatmap.hp,
+                "diff": Beatmap.diff
             }
         ]
     )
