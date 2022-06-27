@@ -507,10 +507,30 @@ async def api_get_map_info(
         )
 
     return ORJSONResponse(
-        {
-            "status": "success",
-            "map": bmap.as_dict,
-        },
+        [
+            {
+                "id": m.id,
+                "md5": m.md5,
+                "set_id": m.set_id,
+                "artist": m.artist,
+                "title": m.title,
+                "version": m.version,
+                "creator": m.creator,
+                "last_update": m.last_update,
+                "total_length": m.total_length,
+                "max_combo": m.max_combo,
+                "status": m.status,
+                "plays": m.plays,
+                "passes": m.passes,
+                "mode": m.mode,
+                "bpm": m.bpm,
+                "cs": m.cs,
+                "od": m.od,
+                "ar": m.ar,
+                "hp": m.hp,
+                "diff": m.diff
+            }
+        ]
     )
 
 
