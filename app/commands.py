@@ -873,22 +873,27 @@ async def unsilence(ctx: Context) -> Optional[str]:
 @command(Privileges.ADMINISTRATOR, aliases=["nuke","w"], hidden=True)
 async def wipe(ctx: Context) -> Optional[str]:
     """Wipe a player."""
-    await app.state.sessions.players.from_cache_or_sql(target=ctx.args[0])
-    if not target:
-        return "User not Found."
-    if target is not int:
-        return "Invalid Formatting. !wipe <userid>"
-    if target is app.state.sessions.bot or target is ctx.player:
-        return "Are you fucking stupid?"
-# Checks passed
+    if len(ctx.args) < 1:
+        # incorrect formatting, throw error.
+        return "Invalid syntax: !wipe <name>"
+    # find any user matching (including offline).
+    if not (t := await app.state.sessions.players.from_cache_or_sql(name=ctx.args[0])):
+        return f'"{ctx.args[0]}" not found.'
+    # Checks and balances
+    if t.priv & Privileges.STAFF and not ctx.player.priv & Privileges.DEVELOPER:
+        return "Only developers can manage staff members."
+    # Check if user is the bot
+    if t is app.state.sessions.bot:
+        return f"You can't wipe {t}!"
+
+    # Wipe user
     await db_conn.execute(
     "UPDATE stats SET pp = 0, tscore = 0, rscore = 0, acc = 0.000, xh_count = 0, x_count = 0, sh_count = 0, s_count = 0, a_count = 0 WHERE id = :user_id",
-    {"user_id": target}
+    "DELETE from scores where userid = :user_id",
+    {"user_id": {t.id}}
 )
-    await db_conn.execute(
-    "DELETE from scores where id= :user_id",
-    {"user_id": target}
-)
+    return f"{t} was wiped."
+
 
 @command(Privileges.ADMINISTRATOR, aliases=["u"], hidden=True)
 async def user(ctx: Context) -> Optional[str]:
