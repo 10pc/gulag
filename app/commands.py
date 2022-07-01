@@ -884,7 +884,7 @@ async def wipe(ctx: Context) -> Optional[str]:
         return "Only developers can manage staff members."
     # Check if user is the bot
     if t is app.state.sessions.bot:
-        return f"You can't wipe {t}!"
+        return f"You can't wipe {t.name}!"
 
     # Wipe user
     await db_conn.execute(
